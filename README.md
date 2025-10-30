@@ -9,7 +9,7 @@ Difference-in-Differences Approach".
 
 To replicate our results:
 
-1. **Click this link**: [LINK](https://hub.2i2c.mybinder.org/user/jgreathouse9-wbcameroonproject-bc63h75f/doc/tree/arcoanalysis.ipynb)
+1. **Click this link**: [LINK](https://mybinder.org/v2/gh/jgreathouse9/WBCameroonProject/b0a4287aeaf5e557021d1a2cb150f62fb89080c9?urlpath=lab%2Ftree%2Farcoanalysis.ipynb)
    *(You will be taken to an interactive Binder environment.)*
 
 2. **Run the code** in the notebook or script provided.
