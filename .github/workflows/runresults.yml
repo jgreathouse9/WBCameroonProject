@@ -1,44 +1,72 @@
-name: Run Analysis
+name: Run Anglophone Civil War Analysis
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - cameroon_fdid/**
+      - cameroon_fdid/**       
       - .github/workflows/runresults.yml
       - pyproject.toml
-      - poetry.lock
 
 jobs:
   run-vectorized:
     runs-on: ubuntu-latest
-
     steps:
+      # -------------------------------
+      # Checkout repository
+      # -------------------------------
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # -------------------------------
+      # Debug: show repo structure
+      # -------------------------------
       - name: Show repo structure for debugging
         run: |
           echo "Repository file structure:"
           find . -type f | sort
 
+      # -------------------------------
+      # Install Poetry
+      # -------------------------------
       - name: Install Poetry
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
           export PATH="$HOME/.local/bin:$PATH"
           poetry --version
 
+      # -------------------------------
+      # Cache Poetry dependencies
+      # -------------------------------
+      - name: Cache Poetry virtualenv
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.cache/pip
+          key: poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            poetry-
+
+      # -------------------------------
+      # Install dependencies
+      # -------------------------------
       - name: Install dependencies
         run: |
           export PATH="$HOME/.local/bin:$PATH"
           poetry install --no-interaction --no-ansi
 
+      # -------------------------------
+      # Run vectorized script
+      # -------------------------------
       - name: Run vectorized script
         run: |
           export PATH="$HOME/.local/bin:$PATH"
-          # Suppress warnings from mlsynth
-          poetry run python -W ignore -m cameroon_fdid.cameroon_results_vectorized
+          poetry run python -m cameroon_fdid.cameroon_results_vectorized
 
+      # -------------------------------
+      # Commit results
+      # -------------------------------
       - name: Commit results
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -52,3 +80,4 @@ jobs:
             git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY} HEAD:${GITHUB_REF}
           else
             echo "No changes to commit."
+          fi
