@@ -4,7 +4,7 @@ on:
   workflow_dispatch:        # Allows manual trigger
   push:
     paths:
-      - cameroon_vectorized_results.py
+      - cameroon_results_vectorized.py
       - .github/workflows/cameroon_vectorized.yml
       - requirements.txt
 
@@ -33,7 +33,7 @@ jobs:
 
       - name: Run vectorized script
         run: |
-          python cameroon_vectorized_results.py
+          python cameroon_results_vectorized.py
 
       - name: Commit results
         run: |
