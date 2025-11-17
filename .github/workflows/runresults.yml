@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - cameroon_fdid/**       
+      - cameroon_fdid/**
       - .github/workflows/runresults.yml
       - pyproject.toml
 
@@ -12,6 +12,7 @@ jobs:
   run-vectorized:
     runs-on: ubuntu-latest
     steps:
+
       # 1. Checkout repo
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -56,7 +57,7 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
           poetry run python -m cameroon_fdid.cameroon_results_vectorized
 
-      # 7. Commit results (txt outputs)
+      # 7. Commit FDID results (txt outputs)
       - name: Commit FDID results
         run: |
           git config user.name "github-actions[bot]"
@@ -67,3 +68,4 @@ jobs:
             git push
           else
             echo "No changes to commit."
+          fi
