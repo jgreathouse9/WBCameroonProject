@@ -1,57 +1,23 @@
 name: Run Cameroon Vectorized Results
 
 on:
-  workflow_dispatch:        # Manual trigger
+  workflow_dispatch:
   push:
     paths:
-      - cameroon_fdid/**       # Any changes inside the package
+      - cameroon_fdid/**       
       - .github/workflows/cameroon_vectorized.yml
       - pyproject.toml
 
 jobs:
-  run-vectorized:
+  debug-repo:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write       # allow committing changes
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0    # Needed for committing changes
+          fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install Poetry
+      - name: Print all files in repo for debugging
         run: |
-          python -m pip install --upgrade pip
-          pip install poetry
-
-      - name: Install dependencies via Poetry
-        run: |
-          poetry install --no-interaction --no-ansi
-
-      - name: List all files in repo for debugging
-        run: |
-          echo "Listing all files in the repository:"
+          echo "Repository file structure:"
           find . -type f | sort
-
-      - name: Run vectorized script
-        run: |
-          poetry run python -m cameroon_fdid.cameroon_results_vectorized
-
-      - name: Commit results if changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          if [ -n "$(git status --porcelain)" ]; then
-            git add *.txt
-            git commit -m "Update Cameroon vectorized FDID dump"
-            git push
-          else
-            echo "No changes to commit."
