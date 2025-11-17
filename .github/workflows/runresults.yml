@@ -1,4 +1,4 @@
-name: Run Anglophone Civil War Analysis
+name: Run Anglophone Conflict Analysis
 
 on:
   workflow_dispatch:
@@ -12,72 +12,58 @@ jobs:
   run-vectorized:
     runs-on: ubuntu-latest
     steps:
-      # -------------------------------
-      # Checkout repository
-      # -------------------------------
+      # 1. Checkout repo
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # -------------------------------
-      # Debug: show repo structure
-      # -------------------------------
-      - name: Show repo structure for debugging
+      # 2. Show repo structure for debugging
+      - name: Show repo structure
         run: |
           echo "Repository file structure:"
           find . -type f | sort
 
-      # -------------------------------
-      # Install Poetry
-      # -------------------------------
+      # 3. Install Poetry
       - name: Install Poetry
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
           export PATH="$HOME/.local/bin:$PATH"
           poetry --version
 
-      # -------------------------------
-      # Cache Poetry dependencies
-      # -------------------------------
-      - name: Cache Poetry virtualenv
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cache/pypoetry
-            ~/.cache/pip
-          key: poetry-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: |
-            poetry-
-
-      # -------------------------------
-      # Install dependencies
-      # -------------------------------
+      # 4. Install dependencies
       - name: Install dependencies
         run: |
           export PATH="$HOME/.local/bin:$PATH"
           poetry install --no-interaction --no-ansi
 
-      # -------------------------------
-      # Run vectorized script
-      # -------------------------------
+      # 5. Ensure poetry.lock is committed
+      - name: Commit poetry.lock if needed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -f "poetry.lock" ]; then
+            git add poetry.lock
+            if [ -n "$(git status --porcelain)" ]; then
+              git commit -m "Add/update poetry.lock"
+              git push
+            else
+              echo "poetry.lock up to date."
+            fi
+          fi
+
+      # 6. Run vectorized script
       - name: Run vectorized script
         run: |
           export PATH="$HOME/.local/bin:$PATH"
           poetry run python -m cameroon_fdid.cameroon_results_vectorized
 
-      # -------------------------------
-      # Commit results
-      # -------------------------------
-      - name: Commit results
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # 7. Commit results (txt outputs)
+      - name: Commit FDID results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
+          git add cameroon_fdid/*.txt
           if [ -n "$(git status --porcelain)" ]; then
-            git add cameroon_fdid/*.txt
             git commit -m "Update Cameroon vectorized FDID dump"
-            git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY} HEAD:${GITHUB_REF}
+            git push
           else
             echo "No changes to commit."
-          fi
