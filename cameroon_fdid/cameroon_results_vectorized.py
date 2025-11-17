@@ -43,7 +43,7 @@ def dump_results_to_text(results: dict, output_file: Path = OUTPUT_FILE) -> None
                     else:
                         f.write("  (No weights)\n")
                     R2_path = res.raw_results.get("R2_at_each_step")
-                    if R2_path:
+                    if R2_path is not None:
                         f.write("\n[R2 at Each Step]\n")
                         f.write("  " + ", ".join(f"{x:.4f}" for x in R2_path) + "\n")
             f.write("\n" + "="*60 + "\n")
