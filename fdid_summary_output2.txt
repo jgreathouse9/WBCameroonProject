@@ -4,17 +4,19 @@
 --- FDID ---
 
 [Effects]
-  ATT: None
-  Percent ATT: None
+  ATT: 0.4738
+  Percent ATT: 33.651
+  SATT: 58.277
 
 [Inference]
-  p-value: None
-  95% CI: (None, None)
-  Std. Error: None
+  p-value: 0.0
+  95% CI: (0.4026, 0.5451)
+  Std. Error: 0.0364
+  Intercept: 0.2296
 
 [Fit Diagnostics]
-  R² pre-treatment: None
-  RMSE pre-treatment: None
+  R² pre-treatment: 0.6836
+  RMSE pre-treatment: 0.1242
 
 [Weights]
   Woleu-Ntem, Gabon: 0.0588
@@ -41,17 +43,19 @@
 --- DID ---
 
 [Effects]
-  ATT: None
-  Percent ATT: None
+  ATT: 0.3011
+  Percent ATT: 19.046
+  SATT: 16.726
 
 [Inference]
-  p-value: None
-  95% CI: (None, None)
-  Std. Error: None
+  p-value: 0.0002
+  95% CI: (0.1433, 0.4589)
+  Std. Error: 0.0805
+  Intercept: -0.5879
 
 [Fit Diagnostics]
-  R² pre-treatment: None
-  RMSE pre-treatment: None
+  R² pre-treatment: -0.5511
+  RMSE pre-treatment: 0.275
 
 ============================================================
 
@@ -60,17 +64,19 @@
 --- FDID ---
 
 [Effects]
-  ATT: None
-  Percent ATT: None
+  ATT: 82.0219
+  Percent ATT: 32.64
+  SATT: 54.696
 
 [Inference]
-  p-value: None
-  95% CI: (None, None)
-  Std. Error: None
+  p-value: 0.0
+  95% CI: (68.8776, 95.1661)
+  Std. Error: 6.7064
+  Intercept: 46.0815
 
 [Fit Diagnostics]
-  R² pre-treatment: None
-  RMSE pre-treatment: None
+  R² pre-treatment: 0.6568
+  RMSE pre-treatment: 22.9066
 
 [Weights]
   Centro Sur, Equatorial Guinea: 0.0667
@@ -95,17 +101,19 @@
 --- DID ---
 
 [Effects]
-  ATT: None
-  Percent ATT: None
+  ATT: -43.7865
+  Percent ATT: -11.611
+  SATT: -5.573
 
 [Inference]
-  p-value: None
-  95% CI: (None, None)
-  Std. Error: None
+  p-value: 0.2127
+  95% CI: (-112.6584, 25.0853)
+  Std. Error: 35.1394
+  Intercept: -1132.8028
 
 [Fit Diagnostics]
-  R² pre-treatment: None
-  RMSE pre-treatment: None
+  R² pre-treatment: -8.421
+  RMSE pre-treatment: 120.0238
 
 ============================================================
 
@@ -114,17 +122,19 @@
 --- FDID ---
 
 [Effects]
-  ATT: None
-  Percent ATT: None
+  ATT: -0.0602
+  Percent ATT: -25.143
+  SATT: -65.254
 
 [Inference]
-  p-value: None
-  95% CI: (None, None)
-  Std. Error: None
+  p-value: 0.0
+  95% CI: (-0.0699, -0.0504)
+  Std. Error: 0.005
+  Intercept: -0.1146
 
 [Fit Diagnostics]
-  R² pre-treatment: None
-  RMSE pre-treatment: None
+  R² pre-treatment: 0.8793
+  RMSE pre-treatment: 0.0168
 
 [Weights]
   Yadé, Central African Republic: 0.2000
@@ -139,17 +149,19 @@
 --- DID ---
 
 [Effects]
-  ATT: None
-  Percent ATT: None
+  ATT: -0.0603
+  Percent ATT: -25.182
+  SATT: -7.517
 
 [Inference]
-  p-value: None
-  95% CI: (None, None)
-  Std. Error: None
+  p-value: 0.1628
+  95% CI: (-0.1449, 0.0244)
+  Std. Error: 0.0432
+  Intercept: -1.9406
 
 [Fit Diagnostics]
-  R² pre-treatment: None
-  RMSE pre-treatment: None
+  R² pre-treatment: -8.1319
+  RMSE pre-treatment: 0.1463
 
 ============================================================
 
@@ -158,17 +170,19 @@
 --- FDID ---
 
 [Effects]
-  ATT: None
-  Percent ATT: None
+  ATT: -16.1474
+  Percent ATT: -27.228
+  SATT: -59.733
 
 [Inference]
-  p-value: None
-  95% CI: (None, None)
-  Std. Error: None
+  p-value: 0.0
+  95% CI: (-19.0007, -13.2942)
+  Std. Error: 1.4557
+  Intercept: -33.2367
 
 [Fit Diagnostics]
-  R² pre-treatment: None
-  RMSE pre-treatment: None
+  R² pre-treatment: 0.8213
+  RMSE pre-treatment: 4.9322
 
 [Weights]
   Fertit, Central African Republic: 0.1000
@@ -188,16 +202,18 @@
 --- DID ---
 
 [Effects]
-  ATT: None
-  Percent ATT: None
+  ATT: -58.1617
+  Percent ATT: -57.405
+  SATT: -10.831
 
 [Inference]
-  p-value: None
-  95% CI: (None, None)
-  Std. Error: None
+  p-value: 0.0443
+  95% CI: (-114.8397, -1.4837)
+  Std. Error: 28.9179
+  Intercept: -1372.4797
 
 [Fit Diagnostics]
-  R² pre-treatment: None
-  RMSE pre-treatment: None
+  R² pre-treatment: -69.5124
+  RMSE pre-treatment: 97.9764
 
 ============================================================
