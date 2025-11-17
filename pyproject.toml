@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "cameroon-fdid"
+version = "0.1.0"
+description = "FDID analysis for Cameroon vectorized results"
+authors = ["Jared Greathouse <j.greathouse200@gmail.com>"]
+readme = "README.md"
+license = "MIT"
+packages = [{include = "cameroon_results_vectorized"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.1.0"
+mlsynth = {git = "https://github.com/jgreathouse9/mlsynth.git"}
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.4"
+
+[build-system]
+requires = ["poetry-core>=1.8.0"]
+build-backend = "poetry.core.masonry.api"
