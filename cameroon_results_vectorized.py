@@ -7,8 +7,7 @@ import matplotlib.pyplot as plt
 
 def dump_results_to_text(results: dict, output_file: str = "fdid_summary_output.txt") -> None:
     """
-    Dump FDID and DID outputs (Pydantic BaseEstimatorResults structure)
-    into a readable text file.
+    Dump FDID and DID outputs into a readable text file.
     """
 
     with open(output_file, "w", encoding="utf-8") as f:
