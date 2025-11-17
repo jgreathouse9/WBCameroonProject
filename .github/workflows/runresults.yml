@@ -40,10 +40,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
+          # Only commit if changes exist
           if [ -n "$(git status --porcelain)" ]; then
             git add cameroon_fdid/*.txt
             git commit -m "Update Cameroon vectorized FDID dump"
             git push
           else
             echo "No changes to commit."
+          fi
