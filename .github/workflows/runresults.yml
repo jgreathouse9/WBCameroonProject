@@ -1,0 +1,50 @@
+name: Run Cameroon Vectorized Results
+
+on:
+  workflow_dispatch:        # Allows manual trigger
+  push:
+    paths:
+      - cameroon_vectorized_results.py
+      - .github/workflows/cameroon_vectorized.yml
+      - requirements.txt
+
+jobs:
+  run-vectorized:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write       # allow the action to commit changes
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # needed for committing
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run vectorized script
+        run: |
+          python cameroon_vectorized_results.py
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Only commit if changes exist
+          if [ -n "$(git status --porcelain)" ]; then
+            git add *.txt
+            git commit -m "Update Cameroon vectorized FDID dump"
+            git push
+          else
+            echo "No changes to commit."
+          fi
