@@ -7,12 +7,14 @@ import matplotlib.pyplot as plt
 
 def dump_results_to_text(results: dict, output_file: str = "fdid_summary_output.txt") -> None:
     """
-    Dump FDID and DID outputs into a readable text file.
+    Dump FDID and DID outputs into a readable text file in a deterministic order.
     """
 
     with open(output_file, "w", encoding="utf-8") as f:
 
-        for key, model in results.items():
+        # Sort keys to ensure consistent order
+        for key in sorted(results.keys()):
+            model = results[key]
             f.write(f"\n===== RESULTS FOR {key} =====\n")
 
             for method in ["FDID", "DID"]:
@@ -59,6 +61,7 @@ def dump_results_to_text(results: dict, output_file: str = "fdid_summary_output.
                         f.write("  " + ", ".join(f"{x:.4f}" for x in R2_path) + "\n")
 
             f.write("\n" + "="*60 + "\n")
+
 
 
 
