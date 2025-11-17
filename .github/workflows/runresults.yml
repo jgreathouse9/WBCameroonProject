@@ -1,26 +1,25 @@
 name: Run Cameroon Vectorized Results
 
 on:
-  workflow_dispatch:        # Allows manual trigger
+  workflow_dispatch:        # Manual trigger
   push:
     paths:
-      - cameroon_fdid/**     # Watch all files in the package
+      - cameroon_fdid/**       # Any changes inside the package
       - .github/workflows/cameroon_vectorized.yml
       - pyproject.toml
-      - poetry.lock
 
 jobs:
   run-vectorized:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write       # allow committing results
+      contents: write       # allow committing changes
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0    # needed for committing
+          fetch-depth: 0    # Needed for committing changes
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -29,26 +28,27 @@ jobs:
 
       - name: Install Poetry
         run: |
-          curl -sSL https://install.python-poetry.org | python3 -
-          export PATH="$HOME/.local/bin:$PATH"
-          poetry --version
+          python -m pip install --upgrade pip
+          pip install poetry
 
-      - name: Install dependencies
+      - name: Install dependencies via Poetry
         run: |
-          export PATH="$HOME/.local/bin:$PATH"
           poetry install --no-interaction --no-ansi
+
+      - name: List all files in repo for debugging
+        run: |
+          echo "Listing all files in the repository:"
+          find . -type f | sort
 
       - name: Run vectorized script
         run: |
-          export PATH="$HOME/.local/bin:$PATH"
           poetry run python -m cameroon_fdid.cameroon_results_vectorized
 
-      - name: Commit results
+      - name: Commit results if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Only commit if changes exist
           if [ -n "$(git status --porcelain)" ]; then
             git add *.txt
             git commit -m "Update Cameroon vectorized FDID dump"
