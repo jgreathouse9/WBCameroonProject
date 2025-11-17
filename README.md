@@ -1,31 +1,90 @@
-# Replication Materials for FDID Analysis
+# Recplicating "Economic Impact of Cameroon’s Anglophone Crisis: A Forward Difference-in-Differences Approach"
 
-[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://tinyurl.com/yswoudds)
+This repository contains the code and data used to perform FDID (Forward Difference-in-Differences) analysis for the paper "Economic Impact of Cameroon’s Anglophone Crisis: A Forward
+Difference-in-Differences Approach". Here is how to reproduce our results.
 
-This repository contains the code and materials used to generate the results reported in our paper "Economic Impact of Cameroon’s Anglophone Crisis: A Forward
-Difference-in-Differences Approach".
+---
 
-## 🔁 How to Replicate Our Results
+## Project Structure
 
-To replicate our results:
+```
+cameroon_fdid/
+├─ __init__.py
+├─ cameroon_results_vectorized.py
+├─ NordOuest.csv
+├─ SudOuest.csv
+.github/workflows/runresults.yml
+pyproject.toml
+poetry.lock
+fdid_summary_output2.txt
+```
 
-1. **Click this link**: [LINK](https://mybinder.org/v2/gh/jgreathouse9/WBCameroonProject/b0a4287aeaf5e557021d1a2cb150f62fb89080c9?urlpath=lab%2Ftree%2Farcoanalysis.ipynb)
-   *(You will be taken to an interactive Binder environment.)*
+---
 
-2. **Run the code** in the notebook or script provided.
+## Requirements
 
-3. When run, the code will automatically generate a file called:
-   **`fdid_summary_output.txt`**
+* Python 3.12
+* Poetry (dependency management and environment reproducibility)
+* Git (to clone the repo)
 
-This file contains the summary output from the [Forward Difference-in-Differences](https://doi.org/10.1287/mksc.2022.0212) (FDID) and Difference-in-Differences (DID) analyses corresponding to our results section.
+All Python dependencies are defined in `pyproject.toml`.
 
-## 📁 Repository Contents
+---
 
-* `arcoanalysis.py` — The main analysis script
-* `requirements.txt` — Dependencies to run the environment, namely `pandas` and [`mlsynth`](https://mlsynth.readthedocs.io)
-* `fdid_summary_output.txt` — (Created at runtime; not stored here)
+## Setup Instructions
 
-## 📌 Note on Reproducibility
+1. **Clone the repository**
 
-This Binder session starts from a cold start every time you launch it. Any files generated are **not saved permanently** and will disappear once the session ends.
-Let me know if you'd like a version of this with section headers for a paper (e.g., “Data Availability Statement”) or if you want help creating a more formal citation block for the repo.
+```bash
+git clone https://github.com/jgreathouse9/WBCameroonProject.git
+cd WBCameroonProject
+```
+
+2. **Install Poetry**
+
+```bash
+curl -sSL https://install.python-poetry.org | python3 -
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+3. **Install dependencies**
+
+```bash
+poetry install --no-interaction --no-ansi
+```
+
+This creates a virtual environment and installs all required dependencies.
+
+---
+
+## Run the Analysis
+
+Run the FDID analysis using [```mlsynth```](https://mlsynth.readthedocs.io/en/latest/index.html):
+
+```bash
+poetry run python -m cameroon_fdid.cameroon_results_vectorized
+```
+
+Outputs will be written to:
+
+```
+cameroon_fdid/fdid_summary_output2.txt
+```
+
+---
+
+## GitHub Actions
+
+The workflow `runresults.yml` automatically:
+
+* Installs dependencies with Poetry.
+* Runs the analysis.
+* Commits updated results to the repository.
+
+---
+
+## Notes
+
+* Ensure `pyproject.toml` and `poetry.lock` are up to date to guarantee environment consistency.
+* Any new data files should be placed in `cameroon_fdid/` to be included in the analysis.
+
